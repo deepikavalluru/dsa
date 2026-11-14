@@ -1,0 +1,43 @@
+Question : 
+    Given a number n, determine whether it is a prime number or not.
+    Note: A prime number is a number greater than 1 that has no positive divisors other than 1 and itself.
+
+
+Code : 
+    class Solution {
+        static boolean isPrime(int n) {
+            // code here
+            int divisorCount = 0;
+            for(int i=1; i*i <= n; i++) {
+                if(n%i == 0) {
+                    divisorCount++;
+                    if(n/i != i) divisorCount++;
+                }
+                
+                if(divisorCount > 2) break;
+            }
+            
+            if(divisorCount != 2) return false;
+            return true;
+        }
+    }
+    
+
+Time Complexity : O(Sqrt of n)
+Space Complexity : O(1)
+
+
+Explanation : 
+    To find whether a number is prime or not, we have to check whether its divisor count is equals to 2 or not.
+    If it equals to 2, means a prime number(1 and itself), if not, the given number is not prime.
+
+    For that : 
+    We go from 1 to sqrt of n, because factors or divisors always occur in pairs.
+    In a pair of divisor, one divisor will be less than sqrt and other will be greater than sqrt.
+    And when we have a divisor that is less than sqrt, we can find the other divisor greater than the sqrt.
+    So there is no need to go beyond sqrt, because we get all possible divisors by going upto sqrt.
+
+    So if i divides n perfectly, we increase divisorCount adn if i is not equal to n/i, we increase again.
+    Because n/sqrt = sqrt and we shoudnt count same divisor twice, we apply the above condition.
+
+    Once the divisorCount is greater than 2, we can break there and return false.

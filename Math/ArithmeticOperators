@@ -1,0 +1,49 @@
+Question : 
+
+    Given two integer variables x and y, perform the following operations:
+
+    p: Addition of x and y
+    q: Subtraction of y from x
+    r: Multiplication of x and y
+    s: Floating-point division of x by y
+    t: Integer division of x by y
+    u: Modulo (remainder when x is divided by y)
+
+Code  :
+    import java.util.*;
+
+    class GFG {
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+
+            // code here
+            
+            int p = x+y;
+            int q = x-y;
+            int r = x*y;
+            float s = (float)x/y;
+            int t = x/y;
+            int u = x%y;
+
+            System.out.printf("%d %d %d %.3f %d %d", p, q, r, s, t, u);
+        }
+    }
+
+Explanation : 
+    1. -(float)x/y; This statement first converts x into float and then performs division.
+       -If we simply write float s = x/y, then if we get a decimal value, java discards decimals and then stores the value after converting into float. 
+       -In any way, we can't retain the lost decimal values.
+    2. -We can also simply type cast y into float, which works as same as the above alternative.
+    
+
+
+    1. -%.3f makes sure that there are exactly three digits after decimal point.
+    2. -We can also use string format if we have to store the value with exactly n digits after decimal point.
+       -String str = String.format("%.3f", s); But this is a string not a float pr double value since we used string.format.
+    3. -We can use Decimal format for custom decimal formatting.
+       -DecimalFormat df = new DecimalFormat("0.000");
+       -String str = df.format(num);
+       -This too returns a string.
