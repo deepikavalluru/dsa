@@ -1,0 +1,41 @@
+Question : 
+    Given a positive integer n, determine whether it is an Armstrong number or not.
+    An Armstrong number is a number where, sum of each digit raised to the power digit count, is equal to the original number.
+
+
+Code : 
+        class Solution {
+        public boolean armstrongNumber(int n) {
+            String s = String.valueOf(n);
+            int digits = s.length();
+
+            int temp = n;
+            int sum = 0;
+
+            while (temp > 0) {
+                int digit = temp % 10;
+                sum += (int) Math.pow(digit, digits);
+                temp /= 10;
+            }
+
+            return sum == n;
+        }
+    }
+
+
+Time Complexity : O(d), d is the number of digits in n.
+space Complexity : O(d), as we are converting int to string
+
+
+Explanation : 
+    A number is called Armstrong number if it's sum of digits to the power of number of digits of n is equal to n.
+    Ex : n = 153
+        number of digits in n = 3
+        => 1^3 * 5^3 * 3^3 = 1+125+27 = 153
+        So this is an armstrong number.
+
+    We first convert int n to string, to get the length of n.
+    then extract each digit by taking modulo by 10 and calculate its power to the length of n and then add it to the sum.
+    finally we check, sum == n if yes return true, else return false;
+
+    We can reduce space complexity to O(1) by calculating number of digits manually with a loop.
