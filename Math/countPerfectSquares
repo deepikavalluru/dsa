@@ -1,0 +1,26 @@
+Question : 
+    Given a positive integer n, find the number of perfect squares that are less than n in the sample space of perfect squares. 
+    The sample space consists of all perfect squares starting from 1 (i.e., 1, 4, 9, 16, 25, …)
+
+
+Code : 
+    class Solution {
+        static int countSquares(int n) {
+            // code here
+            int count=0;
+            for(int i=1; i*i<n; i++) {
+                count++;
+            }
+            return count;
+        }
+    }
+
+
+Time Complexity : O(Sqrt of n)
+Space Complexity : O(1);
+
+
+Explanation : 
+    Here, we have to count number of perfect squares that are strictly less than n.
+    So, we start from i and check i*i < n or not, if yes count increases otherwise loop terminates.
+    Because once we find an i whose square is greater than n, the remaining sqaures will alsobe greater than n.
