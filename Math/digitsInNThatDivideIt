@@ -1,0 +1,71 @@
+Question : 
+    Given a non-negative integer s represented as a string, count the number of digits in s that divide the number represented by s.
+
+    A digit is considered valid only if it is non-zero and the number represented by s is divisible by that digit.
+
+    If a digit appears multiple times in s, each occurrence should be counted separately.
+
+
+Code : 
+    class Solution {
+        public int divisibleByDigits(String s) {
+            // code here
+            boolean isDivisible[] = new boolean[10];
+            
+            for(int d=1; d<=9; d++) {
+                int remainder = 0;
+                
+                for(int i=0; i<s.length(); i++) {
+                    remainder = (remainder*10 + (s.charAt(i)-'0'))%d;
+                }
+                
+                if(remainder == 0) {
+                    isDivisible[d]  = true;
+                }
+            }
+            
+            int count=0;
+            for(int i=0; i<s.length(); i++) {
+                int d = s.charAt(i)-'0';
+                
+                if(isDivisible[d]) count++;
+            }
+            
+            return count;
+        }
+    }
+
+
+
+Time Complexity : O(9 × n + n) = O(n)
+Space Complexity : O(1)
+
+
+Explanation : 
+    We can convert the s into an integer and perform the rmaining operations but, 
+    after converting it into, we can store in a int variable as the constraints say 1 ≤ s.size() ≤ 106
+
+    So we should to use BigInteger which gives
+    Time: O(n × d), where n is the number of digits and d is the cost of dividing the BigInteger by a single digit.
+S   pace: O(n) for storing the BigInteger.
+
+    A better approach is
+        We don't convert s into an integer. 
+
+        All digits lie in the range 0 and 9.
+        So we create a 10 digit array(boolean) which tells that a number divides the s or not.
+
+        We go from 1 to 9 digits
+        And for every digit, we divide the s by the digit by performing literal divison.
+        remainder = (remainder*10 + (s.charAt(i)-'0'))%d;
+
+        if remainder becomes 0, we mark the idx of the array true.
+
+        In this way the array contains all 9 digits info(i.e. whether they can divide the s or not).
+
+        Finally, we again traverse on s, and for every character in s, we convert it into int and 
+        we check in the array at that difits idx, if it is true count++.
+
+        We ignore 0, because num/0 = 0
+
+        Finally we return count;
